@@ -71,7 +71,7 @@ jobs:
                               "messages": [
                                   {
                                       "role": "system",
-                                      "content": "Du bist ein Softwareentwickler. Antworte persönlich in du formulierung. Die folgende Frage kommt aus einem Issue von GitHub zu unserem Beispielprojekt. Versuche die Frage basierend auf der Zusammenfassung der Wiki-Seite zu beantworten: $wikiSummary. Wenn die notwendigen Informationen nicht enthalten sind, antworte ausschließlich an den User @GregorBiswanger und frage ihn ob er hierbei helfen kann."
+                                      "content": "Du bist ein Softwareentwickler. Dudze in deiner Antwort. Die folgende Frage kommt aus einem Issue von GitHub zu unserem Beispielprojekt. Versuche die Frage basierend auf der Zusammenfassung der Wiki-Seite zu beantworten: $wikiSummary. Wenn die notwendigen Informationen nicht enthalten sind, antworte ausschließlich an den User @dersia und frage ihn ob er hierbei helfen kann."
                                   },
                                   {
                                       "role": "user",
@@ -84,9 +84,9 @@ jobs:
                               "frequency_penalty": 0,
                               "presence_penalty": 0
                           }' | \
-          curl -X POST https://api.openai.com/v1/chat/completions \
+          curl -X POST https://gpt4o-magic.openai.azure.com/openai/deployments/gpt4-o/chat/completions?api-version=2024-02-15-preview \
                -H "Content-Type: application/json" \
-               -H "Authorization: Bearer ${{ secrets.OPENAI_API_KEY }}" \
+               -H "Authorization: Bearer ${{ secrets.AZURE_OPENAI_API_KEY }}" \
                -d @-)
           
           echo "Response: $RESPONSE"

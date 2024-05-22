@@ -44,9 +44,9 @@ jobs:
             "presence_penalty": 0
           }')
 
-        RESPONSE=$(curl -s https://api.openai.com/v1/chat/completions \
+        RESPONSE=$(curl -s https://gpt4o-magic.openai.azure.com/openai/deployments/gpt4-o/chat/completions?api-version=2024-02-15-preview \
           -H "Content-Type: application/json" \
-          -H "Authorization: Bearer ${{secrets.OPENAI_API_KEY}}" \
+          -H "Authorization: Bearer ${{secrets.AZURE_OPENAI_API_KEY}}" \
           -d "$JSON_PAYLOAD")
           
         echo "OpenAI Response: $RESPONSE"

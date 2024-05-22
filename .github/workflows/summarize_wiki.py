@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 from transformers import pipeline
 
-WIKI_URL = "https://github.com/GregorBiswanger/ai-dev-process-sample/wiki"
+WIKI_URL = "https://github.com/dersia/ai-dev-process-sample/wiki"
 response = requests.get(WIKI_URL)
 soup = BeautifulSoup(response.content, 'html.parser')
 text = ' '.join(p.get_text() for p in soup.find_all('p'))

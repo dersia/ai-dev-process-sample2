@@ -40,9 +40,9 @@ jobs:
                                 "frequency_penalty": 0,
                                 "presence_penalty": 0
                             }' | \
-        curl -X POST https://api.openai.com/v1/chat/completions \
+        curl -X POST https://gpt4o-magic.openai.azure.com/openai/deployments/gpt4-o/chat/completions?api-version=2024-02-15-preview \
              -H "Content-Type: application/json" \
-             -H "Authorization: Bearer ${{ secrets.OPENAI_API_KEY }}" \
+             -H "api-key: ${{ secrets.AZURE_OPENAI_API_KEY }}" \
              -d @-)
         
         REVIEW_MESSAGE=$(echo $REVIEW_RESPONSE | jq -r .choices[0].message.content)
@@ -67,7 +67,7 @@ jobs:
             body: reviewMessage
           });
           
-    - name: Assign PR to GregorBiswanger if review is positive
+    - name: Assign PR to dersia if review is positive
       if: contains(env.REVIEW_MESSAGE, 'Ich gebe den PR frei')
       uses: actions/github-script@v3
       with:
@@ -78,7 +78,7 @@ jobs:
             issue_number: prNumber,
             owner: context.repo.owner,
             repo: context.repo.repo,
-            assignees: ['GregorBiswanger']
+            assignees: ['dersia']
           });
     
     - name: Fail if review is not positive

@@ -57,21 +57,11 @@ jobs:
                                 "frequency_penalty": 0,
                                 "presence_penalty": 0
                             }' | \
-        curl -X POST https://api.openai.com/v1/chat/completions \
+        curl -X POST https://gpt4o-magic.openai.azure.com/openai/deployments/gpt4-o/chat/completions?api-version=2024-02-15-preview \
              -H "Content-Type: application/json" \
-             -H "Authorization: Bearer ${{ secrets.OPENAI_API_KEY }}" \
+             -H "Authorization: Bearer ${{ secrets.AZURE_OPENAI_API_KEY }}" \
              -d @-)
         
         DOCUMENTATION=$(echo $DOC_RESPONSE | jq -r .choices[0].message.content)
         mkdir -p documentation
         echo "$DOCUMENTATION" > documentation/Home.md
-
-    - name: Aktualisiere Wiki mit Dokumentation
-      uses: docker://decathlon/wiki-page-creator-action:latest
-      env:
-        GH_PAT: ${{ secrets.GHPROJECT_TOKEN }}
-        ACTION_MAIL: gregor.biswanger@web-enliven.de
-        ACTION_NAME: GregorBiswanger
-        OWNER: ${{ github.repository_owner }}
-        REPO_NAME: ai-dev-process-sample
-        MD_FOLDER: documentation
