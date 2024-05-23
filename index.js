@@ -9,6 +9,9 @@ const jokes = [
 
 const server = http.createServer((request, response) => {
   const parsedUrl = url.parse(request.url, true);
+
+  return;
+
   if (parsedUrl.pathname === '/jokes') {
     const joke = jokes[Math.floor(Math.random() * jokes.length)];
     response.statusCode = 200;
