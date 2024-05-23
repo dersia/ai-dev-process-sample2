@@ -12,7 +12,7 @@ const server = http.createServer((request, response) => {
   if (parsedUrl.pathname === '/jokes') {
     const joke = jokes[Math.floor(Math.random() * jokes.length)];
     response.statusCode = 200;
-    response.setHeader('Content-Type', 'text/plain');
+    response.setHeader('Content-Type', 'text/plain';
     response.end(joke);
   } else {
     response.statusCode = 200;
